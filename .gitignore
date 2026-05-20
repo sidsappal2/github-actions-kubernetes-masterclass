@@ -20,3 +20,14 @@ CLAUDE.md
 # Intermediate PDF render output (regenerated from .md + .css)
 docs/skillpulse-cicd-guide.html
 docs/skillpulse-kubernetes-guide.html
+
+# Terraform
+.terraform/
+*.tfstate
+*.tfstate.backup
+*.tfvars
+!*.tfvars.example
+.terraform.lock.hcl
+
+# Keys
+*.pem
