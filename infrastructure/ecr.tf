@@ -21,13 +21,13 @@ resource "aws_ecr_repository" "frontend" {
 }
 
 resource "aws_secretsmanager_secret" "app_secrets" {
-  name                    = "skillpulse/app-secrets"
-  description             = "Secrets for the SkillPulse application"
+  name        = "skillpulse/app-secrets"
+  description = "Secrets for the SkillPulse application"
 }
 
 # We'll initialize a dummy secret value
 resource "aws_secretsmanager_secret_version" "initial_version" {
-  secret_id     = aws_secretsmanager_secret.app_secrets.id
+  secret_id = aws_secretsmanager_secret.app_secrets.id
   secret_string = jsonencode({
     DB_PASSWORD = "change-me-later"
   })
