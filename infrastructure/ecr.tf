@@ -23,7 +23,6 @@ resource "aws_ecr_repository" "frontend" {
 resource "aws_secretsmanager_secret" "app_secrets" {
   name                    = "skillpulse/app-secrets"
   description             = "Secrets for the SkillPulse application"
-  recovery_window_in_days = 0 # Allows immediate deletion for testing
 }
 
 # We'll initialize a dummy secret value
