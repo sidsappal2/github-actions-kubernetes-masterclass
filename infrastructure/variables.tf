@@ -3,6 +3,11 @@ variable "aws_region" {
   default     = "us-east-1"
 }
 
+variable "environment" {
+  description = "Environment (Production or QA)"
+  default     = "Production"
+}
+
 variable "instance_type" {
   description = "EC2 instance type"
   default     = "t3.micro"

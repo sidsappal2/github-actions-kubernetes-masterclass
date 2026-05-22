@@ -1,6 +1,10 @@
 #!/bin/bash
 set -e
 
+# Set hostname
+hostnamectl set-hostname "${hostname}"
+echo "127.0.1.1 ${hostname}" >> /etc/hosts
+
 # Update and install dependencies
 apt-get update
 apt-get install -y apt-transport-https ca-certificates curl software-properties-common git make
