@@ -3,10 +3,9 @@ name: CI
 on:
   push:
     branches: [main]
-    paths-ignore:
-      - 'k8s/**'
-      - 'docs/**'
-      - '**/*.md'
+    paths:
+      - 'backend/**'
+      - 'frontend/**'
 
 jobs:
   build-and-push:

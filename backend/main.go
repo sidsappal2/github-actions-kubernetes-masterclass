@@ -33,7 +33,7 @@ func main() {
 		port = "8080"
 	}
 
-	log.Printf("SkillPulse API running on port %s", port)
+	log.Printf("Sid SkillPulse API running on port %s", port)
 	if err := router.Run(":" + port); err != nil {
 		log.Fatal(err)
 	}
