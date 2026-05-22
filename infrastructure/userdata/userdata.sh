@@ -26,6 +26,34 @@ curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stabl
 install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
 
 # Install Kind
-curl -Lo ./kind https://kind.sigs.k8s.io/dl/v0.22.0/kind-linux-amd64
+curl -Lo ./kind https://kind.sigs.k8s.io/dl/v0.30.0/kind-linux-amd64
 chmod +x ./kind
 mv ./kind /usr/local/bin/kind
+
+# Create Kind Cluster
+# We wait for docker to be ready
+sleep 10
+cat <<EOF > /tmp/kind-config.yaml
+kind: Cluster
+apiVersion: kind.x-k8s.io/v1alpha4
+name: skillpulse
+nodes:
+  - role: control-plane
+    image: kindest/node:v1.35.1
+    extraPortMappings:
+      - containerPort: 30080
+        hostPort: 8888
+        protocol: TCP
+  - role: worker
+    image: kindest/node:v1.35.1
+  - role: worker
+    image: kindest/node:v1.35.1
+EOF
+
+kind create cluster --config /tmp/kind-config.yaml
+
+# Setup kubeconfig for ubuntu user
+mkdir -p /home/ubuntu/.kube
+kind get kubeconfig --name skillpulse > /home/ubuntu/.kube/config
+chown -R ubuntu:ubuntu /home/ubuntu/.kube
+chmod 600 /home/ubuntu/.kube/config
